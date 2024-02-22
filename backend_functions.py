@@ -57,4 +57,6 @@ def getRating(reviews):
 
     # Convert sentiment scores to ratings
     ratings = [int(torch.argmax(score).item()) + 1 for score in result.logits]
-    return ratings
+
+    overall_rating = sum(ratings) / len(ratings) if ratings else 0
+    return overall_rating
