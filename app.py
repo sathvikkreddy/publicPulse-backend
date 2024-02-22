@@ -1,32 +1,29 @@
 import backend_functions
 
-# Example usage of the getReviews function
-reviews = backend_functions.getReviews('https://www.yelp.com/biz/mejico-sydney-2')
-
-# Example usage of the getVerdict function
-verdicts = backend_functions.getVerdict(reviews)
-
-# Example usage of the getRating function
-ratings = backend_functions.getRating(reviews)
-
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.route('/get-reviews')
 def get_reviews():
-    reviews = backend_functions.getReviews('https://www.yelp.com/biz/mejico-sydney-2')
+    data = request.json
+    url = data.get('url')
+    reviews = backend_functions.getReviews(url)
     return jsonify(reviews)
 
 @app.route('/get-verdicts')
 def get_verdicts():
-    reviews = backend_functions.getReviews('https://www.yelp.com/biz/mejico-sydney-2')
+    data = request.json
+    url = data.get('url')
+    reviews = backend_functions.getReviews(url)
     verdicts = backend_functions.getVerdict(reviews)
     return jsonify(verdicts)
 
 @app.route('/get-ratings')
 def get_ratings():
-    reviews = backend_functions.getReviews('https://www.yelp.com/biz/mejico-sydney-2')
+    data = request.json
+    url = data.get('url')
+    reviews = backend_functions.getReviews(url)
     ratings = backend_functions.getRating(reviews)
     return jsonify(ratings)
 
